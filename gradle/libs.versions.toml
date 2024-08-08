@@ -1,0 +1,23 @@
+[versions]
+nodePluginVersion = "7.0.2"
+vaadinVersion = "0.0.20131108.vaadin1"
+
+[libraries]
+node-plugin = { module = "com.github.node-gradle.node:com.github.node-gradle.node.gradle.plugin", version.ref = "nodePluginVersion" }
+android-json = { module = "com.vaadin.external.google:android-json", version.ref = "vaadinVersion" }
+
+[bundles]
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version = "3.2.5" }
+exec = { id = 'com.github.psxpaul.execfork', version = "0.2.2" }
+shadow = { id = 'com.github.johnrengelman.shadow', version = "8.1.1" }
+docker-compose = { id = 'com.avast.gradle.docker-compose', version = "0.17.6" }
+docker = { id = 'com.bmuschko.docker-remote-api', version = "9.4.0" }
+report-license = { id = "com.github.hierynomus.license-report", version = "0.16.1" }
+sonarqube = { id = 'org.sonarqube', version = "4.4.1.3373" }
+cyclonedx = { id = 'org.cyclonedx.bom', version = "1.9.0" }
+spotless = { id = "com.diffplug.spotless", version = "6.25.0" }
+dep-conflict-detection = { id = "org.gradlex.jvm-dependency-conflict-detection", version = "2.0" }
+dep-conflict-resolution = { id = "org.gradlex.jvm-dependency-conflict-resolution", version = "2.0" }
+test-javaagent = { id = "com.ryandens.javaagent-test", version = "0.5.1" }

@@ -1,0 +1,45 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+	alias(libs.plugins.spring.boot)
+	id 'java'
+	id 'jvm-test-suite'
+	id 'war'
+	id 'jacoco'
+	id 'project-report'
+	alias(libs.plugins.dep.conflict.detection)
+	alias(libs.plugins.dep.conflict.resolution)
+	alias(libs.plugins.docker)
+	alias(libs.plugins.report.license)
+	alias(libs.plugins.sonarqube)
+	alias(libs.plugins.cyclonedx)
+	alias(libs.plugins.test.javaagent)
+}
+
+configurations {
+
+}
+
+dependencies {
+	implementation platform(SpringBootPlugin.BOM_COORDINATES)
+	implementation("org.springframework.boot:spring-boot-starter-web")
+}
+
+cyclonedxBom {
+	// includeConfigs is the list of configuration names to include when generating the BOM (leave empty to include every configuration)
+	includeConfigs = ["productionRuntimeClasspath"]
+	// Specified the type of project being built. Defaults to 'library'
+	projectType = "application"
+	// Specified the version of the CycloneDX specification to use. Defaults to '1.5'
+	schemaVersion = "1.5"
+	// Boms destination directory. Defaults to 'build/reports'
+	destination = file("build/reports")
+	// The file name for the generated BOMs (before the file format suffix). Defaults to 'bom'
+	outputName = "cyclonedx-${version}"
+	// The file format generated, can be xml, json or all for generating both. Defaults to 'all'
+	outputFormat = "xml"
+	// Exclude BOM Serial Number. Defaults to 'true'
+	includeBomSerialNumber = false
+	// Exclude License Text. Defaults to 'true'
+	includeLicenseText = false
+}

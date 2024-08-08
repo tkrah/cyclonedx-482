@@ -1,0 +1,32 @@
+buildscript {
+	dependencies {
+		classpath("org.apache.commons:commons-configuration2:2.8.0")
+		classpath("commons-beanutils:commons-beanutils:1.9.4")
+	}
+}
+
+plugins {
+	alias(libs.plugins.docker.compose)
+	// only because of https://github.com/gradle/gradle/issues/17559
+	alias(libs.plugins.docker) apply false
+	alias(libs.plugins.spotless)
+}
+
+ext {
+
+}
+
+
+allprojects {
+	version = "1.0.0-SNAPSHOT"
+	apply plugin: 'base'
+
+	tasks.withType(JavaCompile).configureEach {
+		options.compilerArgs << "-Xlint:deprecation"
+		options.compilerArgs << '-parameters'
+	}
+
+	tasks.withType(Test).configureEach {
+		jvmArgs('-XX:MaxMetaspaceSize=384m')
+	}
+}
